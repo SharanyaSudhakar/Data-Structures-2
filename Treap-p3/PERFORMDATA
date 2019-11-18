@@ -1,0 +1,43 @@
+#! /bin/bash
+
+
+for file in test/*.txt
+do
+	let "num +=1"
+	echo $file 
+	time ./runBst < $file > output/bst$num.txt
+	echo -e "\n *** Treap ***"
+	time ./runtreap < $file > output/treap$num.txt
+	echo -e "\n-------------------------------"
+done
+
+for file in test/sorted/*.txt
+do
+	let "num+=1"
+	echo $file
+	time ./runBst < $file > output/sorted/bst$num.txt
+	echo -e "\n *** Treap ***-"
+	time ./runtreap < $file > output/sorted/treap$num.txt
+	echo -e "\n-------------------------------"
+done
+
+g++ -std=c++14 -o optimBst -DISBST bstDriver.cpp bst.cpp treap.cpp
+
+echo -e " \n **** Optimmized BST ****\n"
+
+for file in test/*.txt
+do 
+	let "num += 1"
+	echo $file
+	time ./optimBst < $file > output/optimBst$num.txt
+	echo -e "\n-------------------------------"
+done
+
+for file in test/sorted/*.txt
+do
+	let "num += 1"
+	echo $file
+	time ./optimBst < $file > output/sorted/optimBst$num.txt
+	echo -e "\n-------------------------------"
+done
+

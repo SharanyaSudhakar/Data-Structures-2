@@ -1,0 +1,9 @@
+#!/bin/bash  
+./runBst < test.txt > bstOutput.txt
+echo "bstOutput.txt          ----       created successfully"  
+./runtreap < test.txt > treapOutput.txt
+echo "treapOutput.txt        ----       created successfully"
+./original < test.txt > exout.txt
+echo "exout.txt              ----       created successfully"
+diff exout.txt bstOutput.txt
+echo -e "\ndiff executed between bstOutput and exout"
